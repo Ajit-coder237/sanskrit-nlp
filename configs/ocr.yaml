@@ -1,0 +1,25 @@
+# OCR model configuration (Phase 2 target; fields reserved now).
+model:
+  type: trocr
+  encoder: google/siglip-base-patch16-224
+  decoder_layers: 6
+  d_model: 512
+  vocab_size: 512
+  max_len: 256
+
+data:
+  synthetic_lines: 50000
+  real_verified_pages: 1000
+  degrader: [blur, noise, illumination, bleedthrough, warp]
+
+train:
+  batch_size: 16
+  lr: 1e-4
+  epochs: 5
+  freeze_encoder: true
+
+eval:
+  test_sets:
+    - data/gold/clean
+    - data/gold/degraded
+  metrics: [cer, wer, sequence_accuracy, metrical_validity]

@@ -1,0 +1,12 @@
+# Evaluation configuration (run: sanskrit-nlp metrics --kind ocr ...).
+seed: 42
+ocr:
+  test_sets:
+    - data/gold/clean
+    - data/gold/degraded
+  metrics: [cer, wer, sequence_accuracy, metrical_validity]
+mt:
+  src_lang: san
+  tgt_lang: npi
+  test: data/gold/san_npi/test.jsonl
+  metrics: [bleu, chrf, meteor, comet, labse, commentary_faithfulness]

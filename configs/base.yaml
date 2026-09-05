@@ -1,0 +1,25 @@
+# Base configuration for the sanskrit-nlp Phase-1 pipeline.
+project: sanskrit-nlp
+seed: 42
+
+ocr:
+  kind: trocr
+  normalize: nfc
+  metrics: [cer, wer]
+
+nlp:
+  sandhi:
+    lexicon: ""
+    prefer_right_shortest: true
+  meter:
+    metrics: [syllable-count]
+
+mt:
+  src_lang: san
+  tgt_lang: npi
+  metrics: [bleu, chrf]
+
+data:
+  raw: data/raw
+  processed: data/processed
+  gold: data/gold

@@ -1,0 +1,24 @@
+# Fine-tuning configuration for the Sanskrit -> Nepali commentary model.
+model:
+  base: Qwen/Qwen2.5-7B-Instruct
+  adapter: lora
+  lora_r: 32
+  lora_alpha: 64
+  lora_dropout: 0.05
+
+data:
+  train: data/processed/san_npi/train.jsonl
+  val: data/processed/san_npi/val.jsonl
+  gold_test: data/gold/san_npi/test.jsonl
+
+train:
+  batch_size: 2
+  grad_accum: 8
+  lr: 2e-4
+  epochs: 1
+  max_seq_len: 512
+  precision: bf16
+
+eval:
+  metrics: [bleu, chrf, meteor, comet, labse, commentary_faithfulness]
+  comet_model: wmt22-comet-da

@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sanskrit-nlp"
+version = "0.1.0"
+description = "End-to-end Sanskrit grantha digitization and Sanskrit-to-Nepali scholar-commentary translation pipeline."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Sanskrit NLP contributors" }]
+keywords = [
+    "sanskrit",
+    "nepali",
+    "ocr",
+    "machine-translation",
+    "sandhi",
+    "chhandas",
+    "indic-nlp",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "mypy>=1.8",
+    "ruff>=0.6",
+]
+ml = [
+    "torch>=2.1",
+    "transformers>=4.40",
+    "datasets>=2.18",
+    "accelerate>=0.30",
+    "peft>=0.10",
+]
+
+[project.scripts]
+sanskrit-nlp = "sanskrit_nlp.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
